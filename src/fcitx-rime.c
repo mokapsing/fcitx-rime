@@ -427,7 +427,7 @@ INPUT_RETURN_VALUE FcitxRimeGetCandWords(void* arg)
         FcitxMessagesAddMessageAtLast(msgPreedit, MSG_CODE, "%s", &context.composition.preedit[context.composition.sel_end]);
     }
 
-    if (context.menu.num_candidates)
+    if (!rime->api->get_option(rime->session_id, "_hide_candidate") && context.menu.num_candidates)
     {
         FcitxCandidateWordList* candList = FcitxInputStateGetCandidateList(input);
         const char* digit = DIGIT_STR_CHOOSE;
