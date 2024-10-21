@@ -368,7 +368,7 @@ INPUT_RETURN_VALUE FcitxRimeGetCandWord(void* arg, FcitxCandidateWord* candWord)
 
 boolean FcitxRimePaging(void* arg, boolean prev) {
     FcitxRime *rime = (FcitxRime *)arg;
-    boolean result = RimeProcessKey(rime->session_id, prev ? FcitxKey_Page_Up : FcitxKey_Page_Down, 0);
+    boolean result = rime->api->process_key(rime->session_id, prev ? FcitxKey_Page_Up : FcitxKey_Page_Down, 0);
     if (result) {
         FcitxRimeGetCandWords(rime);
         FcitxUIUpdateInputWindow(rime->owner);
