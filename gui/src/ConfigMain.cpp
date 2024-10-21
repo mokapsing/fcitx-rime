@@ -521,8 +521,7 @@ bool ConfigMain::yamlToModel() {
 
     // load switchkeys
     auto switch_keys = config.getSwitchKeys();
-    model->switch_keys =
-        QVector<SwitchKeyFunction>(switch_keys.begin(), switch_keys.end());
+    model->switch_keys = QVector<SwitchKeyFunction>::fromStdVector(switch_keys);
 
     // load schemas
     getAvailableSchemas();
@@ -541,7 +540,7 @@ void ConfigMain::getAvailableSchemas() {
         QDir dir(path);
         QList<QString> entryList = dir.entryList(QStringList("*.schema.yaml"),
                                                  QDir::Files | QDir::Readable);
-        files.unite(QSet<QString>(entryList.begin(), entryList.end()));
+        files.unite(QSet<QString>::fromList(entryList));
     }
 
     auto filesList = files.values();
